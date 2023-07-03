@@ -4,29 +4,62 @@
 <head>
     <meta charset="utf-8">
     <script src="js/jquery-2.1.3.min.js"></script>
-    <link rel="stylesheet" href="css/sample.css">
+    <!-- <link rel="stylesheet" href="css/reset.css"> -->
+    <link rel="stylesheet" href="css/bonsaicare.css">
     <title>BonsaiCare</title>
-    <h1>BonsaiCare相談チャット</h1>
+
 </head>
 
 <body>
+    <!-- ヘッダー編集 -->
 
+    <header id="header">
+        <!-- ヘッダーの編集 -->
+        <h1>
+            <img class="logo" src="img/logo.jpg" alt="">
+            <p1>BonsaiCare</p1>
+            <p1> student number/生徒番号:0000</p1>
+        </h1>
+    </header>
     <!-- コンテンツ表示画面 -->
-    <div>
-        <div>
-            名前：<input type="text" id="uname">
+    <div class="container">
+        <div class="image">
+            <!-- 600px画像の配置 -->
+            <img src="img/bonsai01.jpg" alt="画像" width="450" height="450">
+            <!-- <button class="btn-top">front</button> -->
+            <button class="btn-right">right</button>
+            <button class="btn-left">left</button>
+            <p>画像をアップロード</p>
         </div>
-        メッセージ：
-        <div>
-            <textarea name="" id="text" cols="30" rows="10"></textarea>
+        <div class="content">
+            <div>
+                Your BONSAI/育てている盆栽：
+                <select id="bname">
+                    <option value="五葉松">五葉松</option>
+                    <option value="真柏">真柏</option>
+                    <option value="黒松">黒松</option>
+                    <option value="赤松">赤松</option>
+                    <option value="その他盆栽">その他盆栽</option>
+                </select>
+            </div>
+            <div>
+                States/資格：
+                <select id="uname">
+                    <option value="師匠">Master/師匠</option>
+                    <option value="生徒">Student/生徒</option>
+                </select>
+            </div>
+            <div>chatlog/チャットログ</div>
+            <div id="output"></div>
+            <div>message/メッセージ</div>
+            <div>
+                <textarea name="" id="text"></textarea>
+            </div>
+            <div>
+                <button id="send">send/送信</button>
+                <button id="del">all deleate/全削除</button>
+            </div>
         </div>
-        <div>
-            <button id="send">送信</button>
-        </div>
-        チャットログ
-        <div id="output"></div>
-        <button id="del">全削除</button>
-
     </div>
 
 
@@ -43,7 +76,25 @@
     <!--** 以下Firebase **-->
     <script type="module">
 
+        //以下画像変更
+        document.addEventListener("DOMContentLoaded", function () {
+            const image = document.querySelector(".image img");
+            // const btnTop = document.querySelector(".btn-top");
+            const btnRight = document.querySelector(".btn-right");
+            const btnLeft = document.querySelector(".btn-left");
 
+            // btnTop.addEventListener("click", function () {
+            //     image.src = "img/bonsai02.jpg"; // 上の画像のパスに置き換える
+            // });
+
+            btnRight.addEventListener("click", function () {
+                image.src = "img/bonsai02.jpg"; // 右の画像のパスに置き換える
+            });
+
+            btnLeft.addEventListener("click", function () {
+                image.src = "img/bonsai03.jpg"; // 左の画像のパスに置き換える
+            });
+        });
 
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
@@ -57,7 +108,7 @@
         // Your web app's Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyA6rzkxIBfh4JQPMYPaRuiHU3KTKYgHCqg",
-            //github提出時にアップロード市内
+            //github提出時にアップロードしない
             authDomain: "fir-demo-22ed1.firebaseapp.com",
             projectId: "fir-demo-22ed1",
             storageBucket: "fir-demo-22ed1.appspot.com",
@@ -74,11 +125,23 @@
 
         //送信ボタンが押されたらデータDBに送信
         $("#send").on("click", function () {
+
+            // 時刻を取得するための変数
+            var now = new Date();
+            var month = now.getMonth();
+            var date = now.getDate();
+            var hour = ('0' + now.getHours()).slice(-2);
+            var min = ('0' + now.getMinutes()).slice(-2);
+
             //保存したいデータのオブジェクトを作る
             const msg = {
+
+                bname: $("#bname").val(),
                 uname: $("#uname").val(),  //valは今の値を入手  
                 text: $("#text").val(),
-                time: new Date().toLocaleString()
+                // time: new Date().toLocaleString()
+                time: "(" + month + "/" + date + " " + hour + ":" + min + ")"
+
             };
             console.log(msg);
 
@@ -87,6 +150,11 @@
 
             //DBに値を送信
             set(newPostRef, msg);
+
+            // テキストボックスの文字を削除
+            $("#uname").val("");
+            $("#text").val("");
+
         })
 
         onChildAdded(dbRef, function (data) {
@@ -95,16 +163,20 @@
             const key = data.key;
             // $("#output").append(`<p>${msg.uname}:${msg.text}</p>`)
             const h = `<div id="${key}" class="message">
-            <span class ="sender">${msg.uname}:</span>
-            <span class ="tex">${msg.text}</span>
-            <span class ="time">${msg.time}</span>
-
+                <span class="bonname">【${msg.uname}】</span>
+             <span class="sender">${msg.bname}について:</span>
+            <span class="time">${msg.time}</span>
+            <div class="message01">
+                <div class="tex">${msg.text}</div> 
+                <button id="${key}" class="remove">削除</button>
+            </div>
             </div>`;
+
+
             $('#output').append(h);
         });
 
-
-        $('#output').on('click', '.message', function () {
+        $('#output').on('click', '.remove', function () {
             const key = $(this).attr("id");
             const chatRef = ref(db, "chat/" + key);
             remove(chatRef);
@@ -114,6 +186,7 @@
         onChildRemoved(dbRef, function (data) {
             const key = data.key;
             $('#output').find(`div#${key}`).remove();
+
         });
 
         //全削除
@@ -125,34 +198,34 @@
 
         });
 
-        $(document).ready(function () {
-            $("#output").css({
-                height: "300px",
-                width: "300px",
-                overflow: "scroll",
-                backgroundColor: "lightyellow",
-                border: "1px solid black"
+        // $(document).ready(function () {
+        //     // $("#output").css({
+        //     //     height: "300px",
+        //     //     width: "300px",
+        //     //     overflow: "scroll",
+        //     //     backgroundColor: "lightyellow",
+        //     //     border: "1px solid black"
 
-            });
+        //     // });
 
-            $(".message").css({
-                display: "flex",
-                alignItems: "center",
-                marginBottom: "10px"
-            });
+        //     // $(".message").css({
+        //     //     display: "flex",
+        //     //     alignItems: "center",
+        //     //     marginBottom: "10px"
+        //     // });
 
-            $(".sender").css({
-                fontWeight: "bold",
-                marginRight: "5px"
-            });
+        //     // $(".sender").css({
+        //     //     fontWeight: "bold",
+        //     //     marginRight: "5px"
+        //     // });
 
-            $(".tex").css({
-                backgroundColor: "gray",
-                padding: "5px",
-                borderRadius: "5px"
+        //     // $(".tex").css({
+        //     //     backgroundColor: "gray",
+        //     //     padding: "5px",
+        //     //     borderRadius: "5px"
 
-            });
-        });
+        //     // });
+        // });
 
 
         // $('#output').on('click', '.message', function () {
@@ -163,16 +236,7 @@
 
     </script>
 
-
-
-
-
-
-
-
-
-
-
 </body>
+<footer><small>Copyright@ Ryuki Morita. All Rights Reserved</small></footer>
 
 </html>

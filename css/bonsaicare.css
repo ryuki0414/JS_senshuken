@@ -1,55 +1,206 @@
-body{
+/* body{
+    width: 1200px;
+} */
+
+header{
+    display: flex;
+    /* 横並び */
+    justify-content: space-between;
+    /* 両端にロゴとタブを並べる */
+    align-items: center;
+    /* ロゴとタブを垂直中央に並べる */
+}
+
+.logo{
+    position: relative;
+    width: 80px;
+    height:80px;
+}
+
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 100px;
+    /* 両端から100pxの空白を開ける */
+}
+
+.image {
+    position: relative;
+    width: 450px;
+    height: 450px;
+    /* 画像のスタイルを追加 */
+}
+
+
+.btn-right,
+.btn-left {
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* .btn-top {
+    top:30px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+} */
+
+.btn-right {
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+}
+
+.btn-left {
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+}
+
+#output {
+    width: 500px;
+    height: 300px;
+    overflow: scroll;
+    background-color: lightyellow;
+    border: 1px solid black;
+}
+
+p{
+color: blue;
+/* text-underline-position: blue; */
+}
+#text {
+    width: 500px;
+    height: 100px;
+}
+
+h1 {
+    padding: 5px;
+    /*文字周りの余白*/
+    color: #000000;
+    /*文字色*/
+    background: lightyellow;
+    /*背景色*/
+    border-left: solid 10px yellow;
+    /*左線（実線 太さ 色）*/
+}
+
+.tex {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5em;
+    /* マージンの方向を下に変更 */
+    padding: 7px 10px;
+    min-width: 120px;
+    max-width: 100%;
+    color: #555;
+    font-size: 16px;
+    background: #e0edff;
+}
+
+.tex:before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    border: 15px solid transparent;
+    border-bottom: 15px solid #e0edff;
+}
+
+.remove {
+    display: inline-block;
+    /* 削除ボタンをインライン要素に変更 */
+    margin-left: 10px;
+    /* 適切なマージンを指定 */
+}
+
+footer {
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+/* 
+.message {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.message .bonname {
+    font-weight: bold;
+}
+
+.message .sender {
+    text-align: right;
+}
+
+.message .tex {
+    text-align: right;
+}
+
+.message .time {
+    text-align: right;
+}
+
+.message .sender[sender="師匠"] {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.message .sender[sender="生徒"] {
+    flex-direction: row;
+    text-align: left;
+} */
+
+
+
+
+
+/* body{
     margin:0;
     padding:0;
     text-align:left;
     font-size: 20px;
 }
+
 header{
     background-color: #fff;
     border-bottom: 1px solid #ccc;
     text-align: center;
-}
+} */
 
-h1{
-    padding: 5px;/*文字周りの余白*/
-    color: #000000;/*文字色*/
-    background: rgba(55, 189, 242, 0.204);/*背景色*/
-    border-left: solid 10px rgb(55, 189, 242);/*左線（実線 太さ 色）*/
-}
 
-main{
-    /* border-bottom:1px solid #ccc; */
-}
-footer{
-    background-color: #fff;
-    border-bottom:1px solid #ccc;
-    text-align: center;
-}
 /* p{
     font-size:200%;
     text-align: center;
     border-bottom:1px solid #fff;
     height:200px;
 } */
-ul{
+/* ul{
     padding: 0;
     border-top: 1px solid #000000;
-    display:table;  /* 定義 */
+    display:table;  
     table-layout: fixed;
     width:100%;
-}
-li{
+} */
+/* li{
     text-align: center;
     list-style-type:none;
     border: 1px solid #666;
     background-color: #FFF;
-    display:table-cell;  /* 定義 */
+    display:table-cell;  
     cursor: pointer;
 }
 li:hover{
-    /* opacity: 0.75; */
+  
     background: rgb(55, 189, 242);
-    /* color:#fff; */
+  
 }
 
 li:active{
@@ -66,7 +217,7 @@ li:active{
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 /* button.btn{
     color:#FFF;
@@ -74,4 +225,3 @@ li:active{
     border-bottom: 5px solid black;
     
 } */
-
