@@ -2,6 +2,9 @@
     width: 1200px;
 } */
 
+body {
+    background-color: rgb(245, 240, 240);
+}
 
 header {
     display: flex;
@@ -40,7 +43,7 @@ h2 {
 .container {
     display: flex;
     justify-content: space-between;
-    padding: 0 100px;
+    padding: 0 250px;
     margin-top: 50px;
     /* 両端から100pxの空白を開ける */
 }
@@ -53,15 +56,18 @@ h2 {
 }
 
 
-.btn-right,
-.btn-left {
-    position: absolute;
+.btn-next {
+    margin-top: 10px;
+    /* position: absolute;
     width: 50px;
     height: 30px;
     background-color: #ccc;
     display: flex;
     align-items: center;
     justify-content: center;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%); */
 }
 
 /* .btn-top {
@@ -69,18 +75,12 @@ h2 {
     left: 50%;
     transform: translate(-50%, -50%);
 } */
-
+/* 
 .btn-right {
     top: 50%;
     right: 10px;
     transform: translateY(-50%);
-}
-
-.btn-left {
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
-}
+} */
 
 #output {
     width: 500px;
