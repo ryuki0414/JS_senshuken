@@ -2,27 +2,46 @@
     width: 1200px;
 } */
 
-header{
+
+header {
     display: flex;
-    /* 横並び */
     justify-content: space-between;
-    /* 両端にロゴとタブを並べる */
     align-items: center;
-    /* ロゴとタブを垂直中央に並べる */
+    background-color: black;
+    padding: 10px;
 }
 
-.logo{
-    position: relative;
+.logo {
     width: 80px;
-    height:80px;
+    height: 80px;
 }
 
+h1 {
+    margin: 0;
+    padding: 5px;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+}
 
+h2 {
+    padding-top: 50px;
+    /* padding: px; */
+    color: white;
+    font-size: 14px;
+    opacity: 1;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+
+}
 
 .container {
     display: flex;
     justify-content: space-between;
     padding: 0 100px;
+    margin-top: 50px;
     /* 両端から100pxの空白を開ける */
 }
 
@@ -71,25 +90,18 @@ header{
     border: 1px solid black;
 }
 
-p{
-color: blue;
-/* text-underline-position: blue; */
+p {
+    color: blue;
+    text-decoration: underline;
+    /* text-underline-position: blue; */
 }
+
 #text {
     width: 500px;
     height: 100px;
 }
 
-h1 {
-    padding: 5px;
-    /*文字周りの余白*/
-    color: #000000;
-    /*文字色*/
-    background: lightyellow;
-    /*背景色*/
-    border-left: solid 10px yellow;
-    /*左線（実線 太さ 色）*/
-}
+
 
 .tex {
     position: relative;
@@ -121,10 +133,23 @@ h1 {
 }
 
 footer {
-    background-color: #fff;
-    border-bottom: 1px solid #ccc;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    padding: 10px;
+    /* font-family: 'Anton', sans-serif; */
+
+}
+
+footer small {
+    margin: 0;
+    padding: 5px;
+    color: white;
+    font-size: 14px;
     text-align: center;
 }
+
 /* 
 .message {
     display: flex;

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="js/jquery-2.1.3.min.js"></script>
+  <link rel="stylesheet" href="css/LP.css">
+  <title>LandingPage</title>
+  <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+</head>
+
+<body>
+  <header></header>
+
+  <video id="video-bg" src="mov/bonsai.mp4" autoplay loop muted></video>
+
+  <div id="content">
+    <h1>Bonsai Care</h1>
+    <a id="start-button" href="#">Start</a>
+  </div>
+
+  <footer></footer>
+
+  <script>
+    $(document).ready(function () {
+      $("#start-button").click(function (e) {
+        e.preventDefault();
+        window.location.href = "chat_BonsanCare.html";
+      });
+    });
+  </script>
+</body>
+
+</html>

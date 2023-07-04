@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="css/bonsaicare.css">
     <title>BonsaiCare</title>
 
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+
+
+
 </head>
 
 <body>
@@ -15,21 +19,22 @@
 
     <header id="header">
         <!-- ヘッダーの編集 -->
-        <h1>
-            <img class="logo" src="img/logo.jpg" alt="">
-            <p1>BonsaiCare</p1>
-            <p1> student number/生徒番号:0000</p1>
-        </h1>
+
+        <img class="logo" src="img/logo.jpg" alt="">
+        <h1>Bonsai Care</h1>
+        <h2> student number/生徒番号:0000</h2>
+
     </header>
     <!-- コンテンツ表示画面 -->
     <div class="container">
-        <div class="image">
-            <!-- 600px画像の配置 -->
-            <img src="img/bonsai01.jpg" alt="画像" width="450" height="450">
-            <!-- <button class="btn-top">front</button> -->
-            <button class="btn-right">right</button>
-            <button class="btn-left">left</button>
-            <p>画像をアップロード</p>
+        <div>
+            <div class="image">
+                <!-- 600px画像の配置 -->
+                <img src="img/bonsai01.jpg" alt="画像" width="450" height="450">
+            </div> <!-- <button class="btn-top">front</button> -->
+            <!-- <button class="btn-right">right</button> -->
+            <button class="btn-next">⏪ 画像の回転</button>
+            <p id="upload">画像をアップロード</p>
         </div>
         <div class="content">
             <div>
@@ -76,25 +81,35 @@
     <!--** 以下Firebase **-->
     <script type="module">
 
-        //以下画像変更
+        //盆栽の回転ボタンによって画像を変更
         document.addEventListener("DOMContentLoaded", function () {
             const image = document.querySelector(".image img");
-            // const btnTop = document.querySelector(".btn-top");
-            const btnRight = document.querySelector(".btn-right");
-            const btnLeft = document.querySelector(".btn-left");
+            const btnNext = document.querySelector(".btn-next");
 
-            // btnTop.addEventListener("click", function () {
-            //     image.src = "img/bonsai02.jpg"; // 上の画像のパスに置き換える
-            // });
+            const images = [
+                "img/bonsai01.jpg",
+                "img/bonsai02.jpg",
+                "img/bonsai03.jpg",
+                "img/bonsai04.jpg"
+            ];
+            let currentImageIndex = 0;
 
-            btnRight.addEventListener("click", function () {
-                image.src = "img/bonsai02.jpg"; // 右の画像のパスに置き換える
-            });
-
-            btnLeft.addEventListener("click", function () {
-                image.src = "img/bonsai03.jpg"; // 左の画像のパスに置き換える
+            btnNext.addEventListener("click", function () {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                image.src = images[currentImageIndex];
             });
         });
+
+        
+
+        //画像のアップロード機能
+        $("#upload").click(function () {
+            alert("画像ストレージに画像がありません。（これから実装します。。。）");
+        });
+
+        /////////////////////////////////////////////////////////////
+        //以下はチャットアプリに関する挙動
+        //////////////////////////////////////////////////////////////
 
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
@@ -171,11 +186,10 @@
                 <button id="${key}" class="remove">削除</button>
             </div>
             </div>`;
-
-
             $('#output').append(h);
         });
 
+        //削除ボタンが押された時の処理
         $('#output').on('click', '.remove', function () {
             const key = $(this).attr("id");
             const chatRef = ref(db, "chat/" + key);
@@ -195,48 +209,36 @@
             remove(rootRef);
             $("#output").empty();
             alert("全てのチャットログが削除された");
-
         });
 
-        // $(document).ready(function () {
-        //     // $("#output").css({
-        //     //     height: "300px",
-        //     //     width: "300px",
-        //     //     overflow: "scroll",
-        //     //     backgroundColor: "lightyellow",
-        //     //     border: "1px solid black"
+//使わなかったもの
+        //以下画像変更
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     const image = document.querySelector(".image img");
+        //     // const btnTop = document.querySelector(".btn-top");
+        //     const btnRight = document.querySelector(".btn-right");
+        //     const btnLeft = document.querySelector(".btn-left");
 
+        //     // btnTop.addEventListener("click", function () {
+        //     //     image.src = "img/bonsai02.jpg"; // 上の画像のパスに置き換える
         //     // });
 
-        //     // $(".message").css({
-        //     //     display: "flex",
-        //     //     alignItems: "center",
-        //     //     marginBottom: "10px"
-        //     // });
+        //     btnRight.addEventListener("click", function () {
+        //         image.src = "img/bonsai02.jpg"; // 右の画像のパスに置き換える
+        //     });
 
-        //     // $(".sender").css({
-        //     //     fontWeight: "bold",
-        //     //     marginRight: "5px"
-        //     // });
-
-        //     // $(".tex").css({
-        //     //     backgroundColor: "gray",
-        //     //     padding: "5px",
-        //     //     borderRadius: "5px"
-
-        //     // });
+        //     btnLeft.addEventListener("click", function () {
+        //         image.src = "img/bonsai03.jpg"; // 左の画像のパスに置き換える
+        //     });
         // });
 
 
-        // $('#output').on('click', '.message', function () {
-        //     alert('クリックされた！');
-        // });
-
-    //remove,onchildremoveでKeyを探して消せばいいのではないか
 
     </script>
 
 </body>
-<footer><small>Copyright@ Ryuki Morita. All Rights Reserved</small></footer>
+<footer>
+    <small>&copy; Ryuki Morita. All Rights Reserved</small>
+</footer>
 
 </html>
