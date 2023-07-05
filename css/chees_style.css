@@ -4,11 +4,11 @@
 } */
 
 
-body{
+body {
     width: 1200px;
 }
 
-header{
+header {
     display: flex;
     /* 横並び */
     justify-content: space-between;
@@ -17,63 +17,64 @@ header{
     /* ロゴとタブを垂直中央に並べる */
 }
 
-.head01{
+.head01 {
     font-size: 21px;
     display: flex;
     /* margin-left: 50px; */
     /* justify-content: space-between; */
 }
 
-.head01 li{
+.head01 li {
     margin-left: 50px;
-    
+
 }
+
 /* ul＞head01内のli要素にのみ指示 */
 
-a{
+a {
     text-decoration: none;
     /* 箇条書きのポツを削除 */
     color: black;
 }
 
-.mainvisual{
+.mainvisual {
     position: relative;
 }
 
-.mainvisual img{
+.mainvisual img {
     width: 1200px;
 }
 
-.title01{
+.title01 {
     font-size: 45px;
-    font-weight:bold ;
+    font-weight: bold;
     color: white;
     white-space: nowrap;
     margin-bottom: 30px;
 }
 
-.title02{
+.title02 {
     font-size: 30px;
     color: white;
     white-space: nowrap;
 }
 
-.position01{
+.position01 {
     text-align: center;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     /* 中央に寄せて調整 */
 }
 
 /* about編集の開始 */
-.about{
+.about {
     text-align: center;
     margin-bottom: 80px;
 }
 
-.subtitle{
+.subtitle {
     margin-top: 60px;
     margin-bottom: 30px;
     font-size: 24px;
@@ -81,102 +82,106 @@ a{
     font-weight: bold;
 }
 
-.subtitle03{
+.subtitle03 {
     font-size: 18px;
     margin-bottom: 60px;
     text-align: center;
 }
 
-.bottom30p{
+.bottom30p {
     margin-bottom: 30px;
 }
 
-.bottom40p{
+.bottom40p {
     margin-bottom: 40px;
 }
 
-.bottom8p{
+.bottom8p {
     margin-bottom: 8px;
 }
 
-.aboutpic{
+.aboutpic {
     width: 1200px;
     overflow: hidden;
-    }
+}
 
-.aboutpic img{
+.aboutpic img {
     width: 300px;
     float: left;
 }
+
 /* aboutの編集終了 */
 
 /* courseの編集開始 */
-.bg{
+.bg {
     background-color: #fafafa;
 }
-.course{
+
+.course {
     text-align: center;
     margin-top: 60px;
     margin-bottom: 60px;
 }
 
-.subtitle02{
+.subtitle02 {
     margin-bottom: 30px;
     font-size: 24px;
-    color:black;
+    color: black;
     font-weight: bold;
     text-align: center;
 
 }
 
-.para01{
+.para01 {
     display: flex;
 }
-.c01tex{
+
+.c01tex {
     width: 600px;
     margin: auto 50px;
     /* padding-top: 120px;
     margin-left: 50px; */
-    
+
     /* width: 600px; */
     /* height: 404.69; */
 }
 
-.c01pic img{
+.c01pic img {
     width: 600px;
 }
 
-.ctitle{
+.ctitle {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 40px;
 }
 
-.ctex p{
+.ctex p {
     margin-bottom: 10px;
 }
+
 /* div内のどの要素に指示を出すかを明記 */
 
-.c02tex{
+.c02tex {
     width: 600px;
     text-align: right;
     margin: auto 50px auto 120px;
 }
 
-.c02tex p{
+.c02tex p {
     text-align: left;
 }
 
-.newsbox{
+.newsbox {
     display: flex;
     justify-content: center;
 }
 
-.hover01{
+.hover01 {
     margin: 15px;
 }
 
-.hover01:hover{
+.hover01:hover {
     background-color: #bfbfbf;
 }
 
@@ -186,30 +191,30 @@ a{
     align-items: center;
 } */
 
-.newsbox img{
+.newsbox img {
     display: block;
     margin: 0 auto;
 }
 
-.ntitle{
+.ntitle {
     margin-top: 30px;
     margin-bottom: 24px;
 }
 
-.ntex p{
+.ntex p {
     margin-bottom: 8px;
 }
 
-.box01{
+.box01 {
     display: flex;
     justify-content: center;
 }
 
-.box01 :hover{
+.box01 :hover {
     background-color: gray;
 }
 
-.more{
+#more {
     width: 300px;
     height: 60px;
     text-align: center;
@@ -218,24 +223,30 @@ a{
     /* 左右中央に配置 */
     align-items: center;
     /* 上下中央に配置 */
-    background-color: #ffd61a;
+    background-color: #b20df9;
     font-size: 18px;
     font-weight: bold;
     color: white;
     margin-top: 60px;
     margin-bottom: 60px;
 }
+
+#more:hover {
+    filter: grayscale(100%);
+    transform: scale(1.1);
+}
+
 /* newsの編集終了 */
 
 /* access編集の開始 */
-.course02{
-    
+.course02 {
+
     padding-top: 60px;
     padding-bottom: 60px;
     background-color: #fafafa;
 }
 
-iframe{
+iframe {
     border: none;
     width: 1200px;
     height: 300px;
@@ -243,29 +254,32 @@ iframe{
     /* はみ出た部分を表示しない */
 }
 
-.flexbox01{
+.flexbox01 {
     display: flex;
     margin-top: 60px;
     justify-content: center;
 }
-.flexbox01 p{
+
+.flexbox01 p {
     margin: 0px 0px 30px 100px;
 }
+
 /* access編集の終了 */
 
 /* contact編集の開始 */
-.bottom30{
+.bottom30 {
     margin-bottom: 30px;
 }
 
-table{
+table {
     margin-left: auto;
     margin-right: auto;
     /* 要素を左右中央に配置する方法 */
 }
+
 /* 表を中央に配置 */
 
-th{
+th {
     border-top: solid 2px #bfbfbf;
     border-bottom: solid 2px #bfbfbf;
     text-align: left;
@@ -273,35 +287,36 @@ th{
     height: 36px;
     padding-left: 16px;
 }
+
 /* 左列に枠線を追加し、大きさを指定 */
 
-td{
+td {
     border-top: solid 2px #bfbfbf;
     border-bottom: solid 2px #bfbfbf;
     border-left: solid 2px #bfbfbf;
-    border-collapse:  collapse; 
+    border-collapse: collapse;
     width: 500px;
-    height: 36px;   
+    height: 36px;
 }
 
 /* 右列に枠線を追加し、大きさを指定 */
-.th01{
+.th01 {
     vertical-align: middle;
     padding-top: 8px;
     padding-bottom: 8px;
 }
 
-.th02{
+.th02 {
     padding-right: 64px;
     padding-bottom: 16px;
 
 }
 
-.th03{
+.th03 {
     vertical-align: top;
     padding-top: 8px;
 }
- 
+
 /* 
 .flexbox02{
     display: flex;
@@ -313,12 +328,12 @@ td{
     margin: 0px 0px 30px 100px;
 } */
 
-.text-form{
-width: 400px;
-height: 30px;
-margin-top: 8px;
-margin-bottom: 8px;
-margin-left: 8px;
+.text-form {
+    width: 400px;
+    height: 30px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    margin-left: 8px;
 
 }
 
@@ -329,7 +344,7 @@ margin-left: 8px;
     margin-left: 8px;
 }
 
-.formstyle{
+.formstyle {
     width: 400px;
     height: 30px;
     padding-top: auto;
@@ -343,22 +358,22 @@ margin-left: 8px;
     margin-top: 8px;
     margin-bottom: 24px;
     margin-left: 8
-  }
+}
 
-  .text-form02{
+.text-form02 {
     width: 400px;
     height: 100px;
     margin-top: 8px;
     margin-bottom: 8px;
     margin-left: 8px;
-    }
+}
 
 
 
 /* contact編集の終了 */
 
 /* footer編集の開始 */
-.footer{
+.footer {
     width: 1200px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -372,6 +387,7 @@ margin-left: 8px;
     color: white;
     margin-top: 140px;
 }
+
 /* footer編集の終了 */
 
 /* よく使うclass */

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <!-- <link rel="stylesheet" href="css/reset.css"> -->
+    <link rel="stylesheet" href="css/bonsaicare.css">
+    <title>BonsaiCare</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+
+
+
+</head>
+
+<body>
+    <!-- ヘッダー編集 -->
+
+    <header id="header">
+        <!-- ヘッダーの編集 -->
+
+        <img class="logo" src="img/logo.jpg" alt="">
+        <h1>Bonsai Care</h1><p>-Master Account-</p>
+        <h2> student number/生徒番号:0000</h2>
+
+    </header>
+    <!-- ヘッダーの編集の終了 -->
+
+    <!-- コンテンツ表示画面 -->
+    <div class="container">
+        <div class="box1">
+            <div class="image">
+                <!-- 450px画像の配置 -->
+                <img id="upload-image" src="img/bonsai01.jpg" alt="画像" width="450" height="450">
+                <div class=image-number>1</div>
+            </div> <!-- <button class="btn-top">front</button> -->
+            <!-- <button class="btn-right">right</button> -->
+            <button class="btn-next">⏪ left lotation/画像の回転</button>
+            <!-- <button id="upload">upload image/画像をアップロード</button> -->
+        </div>
+        <div class="content">
+            <div>
+                Your BONSAI/育てている盆栽：
+                <select id="bname">
+                    <option value="五葉松">五葉松</option>
+                    <option value="真柏">真柏</option>
+                    <option value="黒松">黒松</option>
+                    <option value="赤松">赤松</option>
+                    <option value="その他盆栽">その他盆栽</option>
+                </select>
+            </div>
+            <div>
+                States/資格：
+                <select id="uname">
+                    <option value="師匠">Master/師匠</option>
+                    <!-- <option value="生徒">Student/生徒</option> -->
+                </select>
+            </div>
+            <div>
+                image number/写真の番号：
+                <select id="imagenum">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+
+                </select>
+            </div>
+            <div>chatlog/チャットログ</div>
+            <div id="output"></div>
+            <div>message/メッセージ</div>
+            <div>
+                <textarea name="" id="text"></textarea>
+            </div>
+            <div>
+                <button id="send">send/送信</button>
+                <button id="del">all deleate/全削除</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!--/ コンテンツ表示画面 -->
+
+
+
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- JQuery -->
+
+
+    <!--** 以下Firebase **-->
+    <script type="module">
+
+        // 画像のアップロード機能
+        $("#upload").click(function () {
+            $(".image").show();
+            $("#upload-image").attr("src", "img/bonsai01.jpg");
+            alert("ローカルストレージ内の画像をuploadしますか？");
+
+        });
+        //盆栽の回転ボタンによって画像を変更
+        document.addEventListener("DOMContentLoaded", function () {
+            const image = document.querySelector(".image img");
+            const btnNext = document.querySelector(".btn-next");
+            const imageNumber = document.querySelector(".image-number");
+
+            const images = [
+                "img/bonsai01.jpg",
+                "img/bonsai02.jpg",
+                "img/bonsai03.jpg",
+                "img/bonsai04.jpg"
+            ];
+            let currentImageIndex = 0;
+
+            btnNext.addEventListener("click", function () {
+                currentImageIndex = (currentImageIndex + 1) % images.length;
+                image.src = images[currentImageIndex];
+                imageNumber.textContent = currentImageIndex + 1;
+            });
+        });
+
+
+
+        //画像のアップロード機能
+        // $("#upload").click(function () {
+        //     alert("画像ストレージに画像がありません。（これから実装します。。。）");
+        // });
+
+        /////////////////////////////////////////////////////////////
+        //以下はチャットアプリに関する挙動
+        //////////////////////////////////////////////////////////////
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+            from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.22.2/firebase-database.js";
+        //verを揃える例）9.22.2
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA6rzkxIBfh4JQPMYPaRuiHU3KTKYgHCqg",
+            //github提出時にアップロードしない
+            authDomain: "fir-demo-22ed1.firebaseapp.com",
+            projectId: "fir-demo-22ed1",
+            storageBucket: "fir-demo-22ed1.appspot.com",
+            messagingSenderId: "462486838084",
+            appId: "1:462486838084:web:923b4b52c385125cae9511"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        //real-time dbに接続する
+        const db = getDatabase(app);
+        const dbRef = ref(db, "chat");
+
+        //送信ボタンが押されたらデータDBに送信
+        $("#send").on("click", function () {
+
+            // 時刻を取得するための変数
+            var now = new Date();
+            var month = now.getMonth();
+            var date = now.getDate();
+            var hour = ('0' + now.getHours()).slice(-2);
+            var min = ('0' + now.getMinutes()).slice(-2);
+
+            //保存したいデータのオブジェクトを作る
+            const msg = {
+
+                bname: $("#bname").val(),
+                uname: $("#uname").val(),
+                imagenum: $("#imagenum").val(),  //valは今の値を入手  
+                //valは今の値を入手  
+                text: $("#text").val(),
+                // time: new Date().toLocaleString()
+                time: "(" + month + "/" + date + " " + hour + ":" + min + ")"
+
+            };
+            console.log(msg);
+
+            //新規のデータを送れる状態にセット
+            const newPostRef = push(dbRef);
+
+            //DBに値を送信
+            set(newPostRef, msg);
+
+            // テキストボックスの文字を削除
+            $("#uname").val("");
+            $("#text").val("");
+
+        })
+
+        onChildAdded(dbRef, function (data) {
+            //新しいデータが追加されたら
+            const msg = data.val();
+            const key = data.key;
+            // $("#output").append(`<p>${msg.uname}:${msg.text}</p>`)
+            const h = `<div id="${key}" class="message">
+                <span class="bonname">【${msg.uname}】</span>
+             <span class="sender">${msg.bname}について:</span>
+            <span class="time">${msg.time}</span>
+            <br><span class="bonname">【${msg.imagenum}番の画像】</span>
+            <div class="message01">
+                <div class="tex">${msg.text}</div> 
+                <button id="${key}" class="remove">削除</button>
+            </div>
+            </div>`;
+            $('#output').append(h);
+        });
+
+        //削除ボタンが押された時の処理
+        $('#output').on('click', '.remove', function () {
+            const key = $(this).attr("id");
+            const chatRef = ref(db, "chat/" + key);
+            remove(chatRef);
+            alert("チャットが削除されました。");
+        });
+
+        onChildRemoved(dbRef, function (data) {
+            const key = data.key;
+            $('#output').find(`div#${key}`).remove();
+
+        });
+
+        //全削除
+        $("#del").on("click", function () {
+            const rootRef = ref(db);
+            remove(rootRef);
+            $("#output").empty();
+            alert("全てのチャットログが削除された");
+        });
+
+//使わなかったもの
+        //以下画像変更
+        // document.addEventListener("DOMContentLoaded", function () {
+        //     const image = document.querySelector(".image img");
+        //     // const btnTop = document.querySelector(".btn-top");
+        //     const btnRight = document.querySelector(".btn-right");
+        //     const btnLeft = document.querySelector(".btn-left");
+
+        //     // btnTop.addEventListener("click", function () {
+        //     //     image.src = "img/bonsai02.jpg"; // 上の画像のパスに置き換える
+        //     // });
+
+        //     btnRight.addEventListener("click", function () {
+        //         image.src = "img/bonsai02.jpg"; // 右の画像のパスに置き換える
+        //     });
+
+        //     btnLeft.addEventListener("click", function () {
+        //         image.src = "img/bonsai03.jpg"; // 左の画像のパスに置き換える
+        //     });
+        // });
+
+
+
+    </script>
+
+</body>
+<footer>
+    <small>&copy; Ryuki Morita. All Rights Reserved</small>
+</footer>
+
+</html>

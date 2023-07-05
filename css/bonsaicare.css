@@ -53,13 +53,13 @@ h2 {
     justify-content: space-between;
     padding-left: 100px;
     margin-top: 50px;
-  }
-  
-  .box1,
-  .content {
+}
+
+.box1,
+.content {
     flex-basis: 50%;
     /* 左右均等に配置 */
-  }
+}
 
 .image {
     position: relative;
@@ -70,14 +70,20 @@ h2 {
 
 div.image-number {
     position: absolute;
-    top: 0; /* 画像の左上に配置 */
+    top: 0;
+    /* 画像の左上に配置 */
     left: 0;
-    margin: 0; /* 余計な隙間を除く */
-    color: white; /* 文字を白に */
-    background: black; /* 背景色 */
+    margin: 0;
+    /* 余計な隙間を除く */
+    color: white;
+    /* 文字を白に */
+    background: black;
+    /* 背景色 */
     font-size: 40px;
-    line-height: 1; /* 行高は1に */
-    padding: 10px; /* 文字周りの余白 */
+    line-height: 1;
+    /* 行高は1に */
+    padding: 10px;
+    /* 文字周りの余白 */
     font-family: 'Anton', sans-serif;
 }
 
@@ -116,9 +122,13 @@ div.image-number {
 }
 
 p {
-    color: blue;
-    text-decoration: underline;
-    /* text-underline-position: blue; */
+    margin: 0;
+    padding: 10px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
 }
 
 #text {
