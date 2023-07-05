@@ -25,16 +25,19 @@
         <h2> student number/生徒番号:0000</h2>
 
     </header>
+    <!-- ヘッダーの編集の終了 -->
+
     <!-- コンテンツ表示画面 -->
     <div class="container">
-        <div>
+        <div class="box1">
             <div class="image">
-                <!-- 600px画像の配置 -->
-                <img src="img/bonsai01.jpg" alt="画像" width="450" height="450">
+                <!-- 450px画像の配置 -->
+                <img id="upload-image" src="" alt="画像" width="450" height="450">
+                <div class=image-number>1</div>
             </div> <!-- <button class="btn-top">front</button> -->
             <!-- <button class="btn-right">right</button> -->
-            <button class="btn-next">⏪ 画像の回転</button>
-            <p id="upload">画像をアップロードする</p>
+            <button class="btn-next">⏪ left lotation/画像の回転</button>
+            <button id="upload">upload image/画像をアップロード</button>
         </div>
         <div class="content">
             <div>
@@ -52,6 +55,16 @@
                 <select id="uname">
                     <option value="師匠">Master/師匠</option>
                     <option value="生徒">Student/生徒</option>
+                </select>
+            </div>
+            <div>
+                image number/写真の番号：
+                <select id="imagenum">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+
                 </select>
             </div>
             <div>chatlog/チャットログ</div>
@@ -81,10 +94,18 @@
     <!--** 以下Firebase **-->
     <script type="module">
 
+        // 画像のアップロード機能
+        $("#upload").click(function () {
+            $(".image").show();
+            $("#upload-image").attr("src", "img/bonsai01.jpg");
+            alert("ローカルストレージ内の画像をuploadしますか？");
+
+        });
         //盆栽の回転ボタンによって画像を変更
         document.addEventListener("DOMContentLoaded", function () {
             const image = document.querySelector(".image img");
             const btnNext = document.querySelector(".btn-next");
+            const imageNumber = document.querySelector(".image-number");
 
             const images = [
                 "img/bonsai01.jpg",
@@ -97,15 +118,16 @@
             btnNext.addEventListener("click", function () {
                 currentImageIndex = (currentImageIndex + 1) % images.length;
                 image.src = images[currentImageIndex];
+                imageNumber.textContent = currentImageIndex + 1;
             });
         });
 
 
 
         //画像のアップロード機能
-        $("#upload").click(function () {
-            alert("画像ストレージに画像がありません。（これから実装します。。。）");
-        });
+        // $("#upload").click(function () {
+        //     alert("画像ストレージに画像がありません。（これから実装します。。。）");
+        // });
 
         /////////////////////////////////////////////////////////////
         //以下はチャットアプリに関する挙動
@@ -152,7 +174,9 @@
             const msg = {
 
                 bname: $("#bname").val(),
-                uname: $("#uname").val(),  //valは今の値を入手  
+                uname: $("#uname").val(),
+                imagenum: $("#imagenum").val(),  //valは今の値を入手  
+                //valは今の値を入手  
                 text: $("#text").val(),
                 // time: new Date().toLocaleString()
                 time: "(" + month + "/" + date + " " + hour + ":" + min + ")"
@@ -181,6 +205,7 @@
                 <span class="bonname">【${msg.uname}】</span>
              <span class="sender">${msg.bname}について:</span>
             <span class="time">${msg.time}</span>
+            <br><span class="bonname">【${msg.imagenum}番の画像】</span>
             <div class="message01">
                 <div class="tex">${msg.text}</div> 
                 <button id="${key}" class="remove">削除</button>
@@ -194,7 +219,7 @@
             const key = $(this).attr("id");
             const chatRef = ref(db, "chat/" + key);
             remove(chatRef);
-            alert(key + "のチャットが削除された！");
+            alert("チャットが削除されました。");
         });
 
         onChildRemoved(dbRef, function (data) {

@@ -18,6 +18,10 @@
   <div id="content">
     <h1>Bonsai Care</h1>
     <a id="start-button" href="#">Start</a>
+    <div id="button-container" style="display: none;">
+      <a id="masterLP" href="gaiyou.html">Master</a>
+      <a id="studentLP" href="chat_BonsaiCare.html">Student</a>
+    </div>
   </div>
 
   <footer></footer>
@@ -26,7 +30,18 @@
     $(document).ready(function () {
       $("#start-button").click(function (e) {
         e.preventDefault();
-        window.location.href = "chat_BonsanCare.html";
+        $(this).hide();
+        $("#button-container").show();
+      });
+
+      $("#masterLP").click(function (e) {
+        e.preventDefault();
+        window.location.href = $(this).attr("href");
+      });
+
+      $("#studentLP").click(function (e) {
+        e.preventDefault();
+        window.location.href = $(this).attr("href");
       });
     });
   </script>
